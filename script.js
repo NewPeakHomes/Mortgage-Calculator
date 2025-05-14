@@ -1,104 +1,66 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const homePriceSlider = document.getElementById('homePrice');
-    const homePriceInput = document.getElementById('homePriceInput');
-    const downPaymentSlider = document.getElementById('downPayment');
-    const downPaymentInput = document.getElementById('downPaymentInput');
-    const loanTermSlider = document.getElementById('loanTerm');
-    const loanTermInput = document.getElementById('loanTermInput');
-    const interestRateSlider = document.getElementById('interestRate');
-    const interestRateInput = document.getElementById('interestRateInput');
-    const propertyTaxSlider = document.getElementById('propertyTax');
-    const propertyTaxInput = document.getElementById('propertyTaxInput');
-    const homeInsuranceSlider = document.getElementById('homeInsurance');
-    const homeInsuranceInput = document.getElementById('homeInsuranceInput');
-    const calculateBtn = document.getElementById('calculateBtn');
-    const resultDisplay = document.getElementById('monthlyPayment');
+// Sync sliders and inputs
+function syncSliderInput(sliderId, inputId, valueId, isCurrency = true) {
+  const slider = document.getElementById(sliderId);
+  const input = document.getElementById(inputId);
+  const valueDisplay = document.getElementById(valueId);
 
-    const collapsibleBtns = document.querySelectorAll('.collapsible-btn');
-    
-    function updateValues() {
-        document.getElementById('homePriceValue').textContent = homePriceSlider.value;
-        document.getElementById('downPaymentValue').textContent = downPaymentSlider.value;
-        document.getElementById('loanTermValue').textContent = loanTermSlider.value;
-        document.getElementById('interestRateValue').textContent = interestRateSlider.value;
-        document.getElementById('propertyTaxValue').textContent = propertyTaxSlider.value;
-        document.getElementById('homeInsuranceValue').textContent = homeInsuranceSlider.value;
+  function updateFromSlider() {
+    input.value = slider.value;
+    valueDisplay.textContent = isCurrency
+      ? parseFloat(slider.value).toLocaleString()
+      : slider.value;
+  }
 
-        homePriceInput.value = homePriceSlider.value;
-        downPaymentInput.value = downPaymentSlider.value;
-        loanTermInput.value = loanTermSlider.value;
-        interestRateInput.value = interestRateSlider.value;
-        propertyTaxInput.value = propertyTaxSlider.value;
-        homeInsuranceInput.value = homeInsuranceSlider.value;
-    }
+  function updateFromInput() {
+    slider.value = input.value;
+    valueDisplay.textContent = isCurrency
+      ? parseFloat(input.value).toLocaleString()
+      : input.value;
+  }
 
-    function calculateMortgage() {
-        const homePrice = parseFloat(homePriceSlider.value);
-        const downPayment = parseFloat(downPaymentSlider.value);
-        const loanAmount = homePrice - downPayment;
-        const loanTermYears = parseFloat(loanTermSlider.value);
-        const annualInterestRate = parseFloat(interestRateSlider.value) / 100;
-        const monthlyInterestRate = annualInterestRate / 12;
-        const numberOfPayments = loanTermYears * 12;
+  slider.addEventListener('input', updateFromSlider);
+  input.addEventListener('input', updateFromInput);
 
-        const propertyTax = parseFloat(propertyTaxSlider.value) / 12;
-        const homeInsurance = parseFloat(homeInsuranceSlider.value) / 12;
+  updateFromSlider();
+}
 
-        const mortgagePayment = (loanAmount * monthlyInterestRate) /
-            (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+// Initialize synced inputs
+syncSliderInput('homePrice', 'homePriceInput', 'homePriceValue');
+syncSliderInput('interestRate', 'interestRateInput', 'interestRateValue', false);
+syncSliderInput('downPayment', 'downPaymentInput', 'downPaymentValue');
+syncSliderInput('propertyTax', 'propertyTaxInput', 'propertyTaxValue');
+syncSliderInput('insurance', 'insuranceInput', 'insuranceValue');
 
-        const totalMonthlyPayment = mortgagePayment + propertyTax + homeInsurance;
-        resultDisplay.textContent = `$${totalMonthlyPayment.toFixed(2)}`;
-    }
-
-    // Event Listeners
-    homePriceSlider.addEventListener('input', updateValues);
-    downPaymentSlider.addEventListener('input', updateValues);
-    loanTermSlider.addEventListener('input', updateValues);
-    interestRateSlider.addEventListener('input', updateValues);
-    propertyTaxSlider.addEventListener('input', updateValues);
-    homeInsuranceSlider.addEventListener('input', updateValues);
-
-    homePriceInput.addEventListener('input', function () {
-        homePriceSlider.value = homePriceInput.value;
-        updateValues();
-    });
-    downPaymentInput.addEventListener('input', function () {
-        downPaymentSlider.value = downPaymentInput.value;
-        updateValues();
-    });
-    loanTermInput.addEventListener('input', function () {
-        loanTermSlider.value = loanTermInput.value;
-        updateValues();
-    });
-    interestRateInput.addEventListener('input', function () {
-        interestRateSlider.value = interestRateInput.value;
-        updateValues();
-    });
-    propertyTaxInput.addEventListener('input', function () {
-        propertyTaxSlider.value = propertyTaxInput.value;
-        updateValues();
-    });
-    homeInsuranceInput.addEventListener('input', function () {
-        homeInsuranceSlider.value = homeInsuranceInput.value;
-        updateValues();
-    });
-
-    calculateBtn.addEventListener('click', calculateMortgage);
-
-    // Collapsible section
-    collapsibleBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            this.classList.toggle('active');
-            const content = this.nextElementSibling;
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-            } else {
-                content.style.display = 'block';
-            }
-        });
-    });
-
-    // Initialize values
-    updateValues();
+// Collapsible logic
+document.querySelectorAll('.collapsible-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    button.classList.toggle('active');
+    const content = button.nextElementSibling;
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  });
 });
+
+// Mortgage calculation
+function calculateMortgage() {
+  const price = parseFloat(document.getElementById('homePriceInput').value) || 0;
+  const down = parseFloat(document.getElementById('downPaymentInput').value) || 0;
+  const rate = parseFloat(document.getElementById('interestRateInput').value) || 0;
+  const tax = parseFloat(document.getElementById('propertyTaxInput').value) || 0;
+  const insurance = parseFloat(document.getElementById('insuranceInput').value) || 0;
+
+  const principal = price - down;
+  const monthlyRate = rate / 100 / 12;
+  const numPayments = 30 * 12;
+
+  const monthlyPrincipalInterest = rate > 0
+    ? principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -numPayments))
+    : principal / numPayments;
+
+  const monthlyTax = tax / 12;
+  const monthlyInsurance = insurance / 12;
+
+  const total = monthlyPrincipalInterest + monthlyTax + monthlyInsurance;
+
+  document.getElementById('result').textContent = 
+    `Estimated Monthly Payment: $${total.toFixed(2).toLocaleString()}`;
+}
