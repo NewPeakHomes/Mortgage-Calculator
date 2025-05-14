@@ -23,15 +23,17 @@ body {
 
 h2 {
     text-align: center;
+    color: #FF5A1F; /* Orange */
 }
 
 label {
     font-size: 16px;
     display: block;
     margin: 10px 0;
+    color: #FF5A1F; /* Orange */
 }
 
-input[type="range"], input[type="number"] {
+input[type="range"], input[type="number"], button {
     width: 100%;
     margin: 5px 0;
 }
@@ -46,18 +48,16 @@ input[type="range"], input[type="number"] {
 }
 
 .slider:focus {
-    background: #4CAF50;
+    background: #002B3A; /* Dark Blue */
 }
 
-input[type="number"] {
+input[type="number"], button {
     padding: 5px;
     font-size: 16px;
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
+    background-color: #FF5A1F; /* Orange */
     color: white;
     border: none;
     border-radius: 5px;
@@ -66,10 +66,53 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #e94b1f; /* Slightly darker orange */
 }
 
 #result {
     margin-top: 20px;
     text-align: center;
+}
+
+.collapsible {
+    margin-top: 10px;
+}
+
+.collapsible-btn {
+    background-color: #002B3A; /* Dark Blue */
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.collapsible-btn:hover {
+    background-color: #1a3f52; /* Slightly darker blue */
+}
+
+.content {
+    padding: 10px;
+    display: none;
+    background-color: #f1f1f1;
+}
+
+.content input[type="range"], .content input[type="number"] {
+    width: 90%;
+}
+
+.collapsible-btn:after {
+    content: '\002B'; /* Plus sign */
+    float: right;
+}
+
+.active:after {
+    content: "\2212"; /* Minus sign */
+}
+
+.active .content {
+    display: block;
 }
