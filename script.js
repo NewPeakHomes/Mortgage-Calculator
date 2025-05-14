@@ -1,7 +1,7 @@
 class MortgageCalc extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <link rel="stylesheet" href="https://yourdomain.com/mortgage-calculator/calculator.css">
+      <link rel="stylesheet" href="./calculator.css">
 
       <div class="calculator">
         <h2>Mortgage Calculator</h2>
