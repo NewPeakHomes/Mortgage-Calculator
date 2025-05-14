@@ -1,131 +1,66 @@
-* {
-  box-sizing: border-box;
+// Sync sliders and inputs
+function syncSliderInput(sliderId, inputId, valueId, isCurrency = true) {
+  const slider = document.getElementById(sliderId);
+  const input = document.getElementById(inputId);
+  const valueDisplay = document.getElementById(valueId);
+
+  function updateFromSlider() {
+    input.value = slider.value;
+    valueDisplay.textContent = isCurrency
+      ? parseFloat(slider.value).toLocaleString()
+      : slider.value;
+  }
+
+  function updateFromInput() {
+    slider.value = input.value;
+    valueDisplay.textContent = isCurrency
+      ? parseFloat(input.value).toLocaleString()
+      : input.value;
+  }
+
+  slider.addEventListener('input', updateFromSlider);
+  input.addEventListener('input', updateFromInput);
+
+  updateFromSlider();
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+// Initialize synced inputs
+syncSliderInput('homePrice', 'homePriceInput', 'homePriceValue');
+syncSliderInput('interestRate', 'interestRateInput', 'interestRateValue', false);
+syncSliderInput('downPayment', 'downPaymentInput', 'downPaymentValue');
+syncSliderInput('propertyTax', 'propertyTaxInput', 'propertyTaxValue');
+syncSliderInput('insurance', 'insuranceInput', 'insuranceValue');
 
-.calculator {
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 450px;
-}
+// Only Down Payment section is collapsible
+document.querySelectorAll('.collapsible-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    button.classList.toggle('active');
+    const content = button.nextElementSibling;
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  });
+});
 
-h2 {
-  text-align: center;
-  color: #FF5A1F;
-  font-size: 22px;
-  margin-bottom: 15px;
-}
+// Mortgage calculation
+function calculateMortgage() {
+  const price = parseFloat(document.getElementById('homePriceInput').value) || 0;
+  const down = parseFloat(document.getElementById('downPaymentInput').value) || 0;
+  const rate = parseFloat(document.getElementById('interestRateInput').value) || 0;
+  const tax = parseFloat(document.getElementById('propertyTaxInput').value) || 0;
+  const insurance = parseFloat(document.getElementById('insuranceInput').value) || 0;
 
-label {
-  font-size: 14px;
-  display: block;
-  margin: 8px 0 2px;
-  color: #FF5A1F;
-}
+  const principal = price - down;
+  const monthlyRate = rate / 100 / 12;
+  const numPayments = 30 * 12;
 
-input[type="range"], input[type="number"], button {
-  width: 100%;
-  margin: 4px 0 10px;
-}
+  const monthlyPrincipalInterest = rate > 0
+    ? principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -numPayments))
+    : principal / numPayments;
 
-input[type="number"] {
-  padding: 4px;
-  font-size: 14px;
-}
+  const monthlyTax = tax / 12;
+  const monthlyInsurance = insurance / 12;
 
-button {
-  background-color: #FF5A1F;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 8px;
-  margin-top: 10px;
-}
+  const total = monthlyPrincipalInterest + monthlyTax + monthlyInsurance;
 
-button:hover {
-  background-color: #e94b1f;
-}
-
-#result {
-  margin-top: 15px;
-  text-align: center;
-  color: #FF5A1F;
-  font-weight: bold;
-}
-
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 8px;
-  background: #ddd;
-  border-radius: 5px;
-  outline: none;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: #002B3A;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: #002B3A;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.collapsible {
-  margin-top: 10px;
-}
-
-.collapsible-btn {
-  background-color: #002B3A;
-  color: white;
-  padding: 8px;
-  font-size: 14px;
-  border: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.collapsible-btn:hover {
-  background-color: #1a3f52;
-}
-
-.collapsible-btn:after {
-  content: '\002B';
-  float: right;
-}
-
-.collapsible-btn.active:after {
-  content: "\2212";
-}
-
-.content {
-  padding: 8px;
-  display: none;
-  background-color: #f1f1f1;
-  border-radius: 0 0 5px 5px;
+  document.getElementById('result').textContent = 
+    `Estimated Monthly Payment: $${total.toFixed(2).toLocaleString()}`;
 }
