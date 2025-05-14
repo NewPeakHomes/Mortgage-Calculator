@@ -31,8 +31,101 @@ h2 {
 label {
   font-size: 14px;
   display: block;
-  margin: 8px 0;
+  margin: 8px 0 2px;
   color: #FF5A1F;
 }
 
-input[type="]()
+input[type="range"], input[type="number"], button {
+  width: 100%;
+  margin: 4px 0 10px;
+}
+
+input[type="number"] {
+  padding: 4px;
+  font-size: 14px;
+}
+
+button {
+  background-color: #FF5A1F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #e94b1f;
+}
+
+#result {
+  margin-top: 15px;
+  text-align: center;
+  color: #FF5A1F;
+  font-weight: bold;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #002B3A;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #002B3A;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.collapsible {
+  margin-top: 10px;
+}
+
+.collapsible-btn {
+  background-color: #002B3A;
+  color: white;
+  padding: 8px;
+  font-size: 14px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.collapsible-btn:hover {
+  background-color: #1a3f52;
+}
+
+.collapsible-btn:after {
+  content: '\002B';
+  float: right;
+}
+
+.collapsible-btn.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 8px;
+  display: none;
+  background-color: #f1f1f1;
+  border-radius: 0 0 5px 5px;
+}
