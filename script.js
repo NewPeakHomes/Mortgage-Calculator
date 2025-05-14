@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const calculateBtn = document.getElementById('calculateBtn');
     const resultDisplay = document.getElementById('monthlyPayment');
 
+    const collapsibleBtns = document.querySelectorAll('.collapsible-btn');
+    
     function updateValues() {
         document.getElementById('homePriceValue').textContent = homePriceSlider.value;
         document.getElementById('downPaymentValue').textContent = downPaymentSlider.value;
@@ -83,6 +85,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calculateBtn.addEventListener('click', calculateMortgage);
+
+    // Collapsible section
+    collapsibleBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.classList.toggle('active');
+            const content = this.nextElementSibling;
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        });
+    });
 
     // Initialize values
     updateValues();
