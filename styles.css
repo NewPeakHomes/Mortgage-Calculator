@@ -40,7 +40,8 @@ input[type="range"] {
   accent-color: var(--orange);
 }
 
-input[type="number"] {
+input[type="number"],
+select {
   width: 100%;
   padding: 5px;
   font-size: 16px;
@@ -50,14 +51,17 @@ input[type="number"] {
   color: var(--orange);
 }
 
-details summary {
+details summary.collapsible {
+  background-color: var(--darkblue);
+  color: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 20px;
-  color: var(--orange);
 }
 
-details[open] summary {
+details[open] summary.collapsible {
   margin-bottom: 10px;
 }
 
