@@ -6,11 +6,11 @@
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   max-width: 500px;
   margin: auto;
-  color: #1d2d44;
+  color: #1d2d44; /* Dark Blue */
 }
 
 .calculator h2 {
-  color: #1d2d44; /* Dark Blue */
+  color: #1d2d44;
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
