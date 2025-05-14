@@ -1,82 +1,89 @@
-class MortgageCalc extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-      <link rel="stylesheet" href="./calculator.css">
+document.addEventListener('DOMContentLoaded', function () {
+    const homePriceSlider = document.getElementById('homePrice');
+    const homePriceInput = document.getElementById('homePriceInput');
+    const downPaymentSlider = document.getElementById('downPayment');
+    const downPaymentInput = document.getElementById('downPaymentInput');
+    const loanTermSlider = document.getElementById('loanTerm');
+    const loanTermInput = document.getElementById('loanTermInput');
+    const interestRateSlider = document.getElementById('interestRate');
+    const interestRateInput = document.getElementById('interestRateInput');
+    const propertyTaxSlider = document.getElementById('propertyTax');
+    const propertyTaxInput = document.getElementById('propertyTaxInput');
+    const homeInsuranceSlider = document.getElementById('homeInsurance');
+    const homeInsuranceInput = document.getElementById('homeInsuranceInput');
+    const calculateBtn = document.getElementById('calculateBtn');
+    const resultDisplay = document.getElementById('monthlyPayment');
 
-      <div class="calculator">
-        <h2>Mortgage Calculator</h2>
+    function updateValues() {
+        document.getElementById('homePriceValue').textContent = homePriceSlider.value;
+        document.getElementById('downPaymentValue').textContent = downPaymentSlider.value;
+        document.getElementById('loanTermValue').textContent = loanTermSlider.value;
+        document.getElementById('interestRateValue').textContent = interestRateSlider.value;
+        document.getElementById('propertyTaxValue').textContent = propertyTaxSlider.value;
+        document.getElementById('homeInsuranceValue').textContent = homeInsuranceSlider.value;
 
-        <label>ZIP Code:</label>
-        <input type="text" id="zip" placeholder="e.g., 83422" maxlength="5" />
+        homePriceInput.value = homePriceSlider.value;
+        downPaymentInput.value = downPaymentSlider.value;
+        loanTermInput.value = loanTermSlider.value;
+        interestRateInput.value = interestRateSlider.value;
+        propertyTaxInput.value = propertyTaxSlider.value;
+        homeInsuranceInput.value = homeInsuranceSlider.value;
+    }
 
-        <label>Home Price: $<span id="priceVal">400,000</span></label>
-        <input type="range" min="50000" max="1000000" step="10000" value="400000" id="price">
+    function calculateMortgage() {
+        const homePrice = parseFloat(homePriceSlider.value);
+        const downPayment = parseFloat(downPaymentSlider.value);
+        const loanAmount = homePrice - downPayment;
+        const loanTermYears = parseFloat(loanTermSlider.value);
+        const annualInterestRate = parseFloat(interestRateSlider.value) / 100;
+        const monthlyInterestRate = annualInterestRate / 12;
+        const numberOfPayments = loanTermYears * 12;
 
-        <label>Down Payment: $<span id="downVal">80,000</span></label>
-        <input type="range" min="0" max="1000000" step="10000" value="80000" id="down">
+        const propertyTax = parseFloat(propertyTaxSlider.value) / 12;
+        const homeInsurance = parseFloat(homeInsuranceSlider.value) / 12;
 
-        <label>Loan Term: <span id="termVal">30</span> years</label>
-        <input type="range" min="10" max="40" step="5" value="30" id="term">
+        const mortgagePayment = (loanAmount * monthlyInterestRate) /
+            (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
 
-        <label>Interest Rate (%):</label>
-        <input type="number" id="rate" value="6.5" step="0.01" min="0">
+        const totalMonthlyPayment = mortgagePayment + propertyTax + homeInsurance;
+        resultDisplay.textContent = `$${totalMonthlyPayment.toFixed(2)}`;
+    }
 
-        <label>Property Tax Rate (%):</label>
-        <input type="number" id="tax" value="1.2" step="0.01" min="0">
+    // Event Listeners
+    homePriceSlider.addEventListener('input', updateValues);
+    downPaymentSlider.addEventListener('input', updateValues);
+    loanTermSlider.addEventListener('input', updateValues);
+    interestRateSlider.addEventListener('input', updateValues);
+    propertyTaxSlider.addEventListener('input', updateValues);
+    homeInsuranceSlider.addEventListener('input', updateValues);
 
-        <label>Home Insurance (monthly $):</label>
-        <input type="number" id="insurance" value="100" step="1" min="0">
-
-        <div class="output">
-          <h3>Estimated Monthly Payment</h3>
-          <p id="monthly">$0.00</p>
-        </div>
-      </div>
-    `;
-
-    this.calcElements = {
-      price: this.querySelector('#price'),
-      down: this.querySelector('#down'),
-      term: this.querySelector('#term'),
-      rate: this.querySelector('#rate'),
-      tax: this.querySelector('#tax'),
-      insurance: this.querySelector('#insurance'),
-      monthly: this.querySelector('#monthly'),
-      priceVal: this.querySelector('#priceVal'),
-      downVal: this.querySelector('#downVal'),
-      termVal: this.querySelector('#termVal')
-    };
-
-    Object.values(this.calcElements).forEach(el => {
-      if (el.tagName === 'INPUT') {
-        el.addEventListener('input', () => this.calculate());
-      }
+    homePriceInput.addEventListener('input', function () {
+        homePriceSlider.value = homePriceInput.value;
+        updateValues();
+    });
+    downPaymentInput.addEventListener('input', function () {
+        downPaymentSlider.value = downPaymentInput.value;
+        updateValues();
+    });
+    loanTermInput.addEventListener('input', function () {
+        loanTermSlider.value = loanTermInput.value;
+        updateValues();
+    });
+    interestRateInput.addEventListener('input', function () {
+        interestRateSlider.value = interestRateInput.value;
+        updateValues();
+    });
+    propertyTaxInput.addEventListener('input', function () {
+        propertyTaxSlider.value = propertyTaxInput.value;
+        updateValues();
+    });
+    homeInsuranceInput.addEventListener('input', function () {
+        homeInsuranceSlider.value = homeInsuranceInput.value;
+        updateValues();
     });
 
-    this.calculate();
-  }
+    calculateBtn.addEventListener('click', calculateMortgage);
 
-  calculate() {
-    const price = parseFloat(this.calcElements.price.value);
-    const down = parseFloat(this.calcElements.down.value);
-    const loan = price - down;
-    const rate = parseFloat(this.calcElements.rate.value) / 100 / 12;
-    const n = parseInt(this.calcElements.term.value) * 12;
-
-    const propertyTaxRate = parseFloat(this.calcElements.tax.value) / 100;
-    const insurance = parseFloat(this.calcElements.insurance.value);
-
-    const monthlyTax = (price * propertyTaxRate) / 12;
-
-    const monthlyPrincipal = rate === 0 ? loan / n : (loan * rate) / (1 - Math.pow(1 + rate, -n));
-
-    const totalMonthly = monthlyPrincipal + monthlyTax + insurance;
-
-    this.calcElements.monthly.textContent = `$${totalMonthly.toFixed(2).toLocaleString()}`;
-    this.calcElements.priceVal.textContent = price.toLocaleString();
-    this.calcElements.downVal.textContent = down.toLocaleString();
-    this.calcElements.termVal.textContent = this.calcElements.term.value;
-  }
-}
-
-customElements.define('mortgage-calc', MortgageCalc);
+    // Initialize values
+    updateValues();
+});
