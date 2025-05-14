@@ -1,32 +1,49 @@
-.mortgage-calculator {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+.mortgage-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #D6D6D2; /* Light Grey */
+  border: 1px solid #CCC;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  color: #022D3F; /* Dark Blue Text */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-label {
-  display: block;
-  margin-top: 10px;
+.mortgage-container h2 {
+  color: #F75C1C; /* Orange Title */
+  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-input {
+.mortgage-container input {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #999;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
-button {
-  padding: 10px 15px;
-  background-color: #007BFF;
+.mortgage-container button {
+  background-color: #022D3F; /* Dark Blue */
   color: white;
   border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.mortgage-container button:hover {
+  background-color: #F75C1C; /* Orange Hover */
 }
 
-#result {
+.mortgage-result {
   margin-top: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #022D3F; /* Match text to theme */
 }
