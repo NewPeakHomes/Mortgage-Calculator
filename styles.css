@@ -1,66 +1,118 @@
-// Sync sliders and inputs
-function syncSliderInput(sliderId, inputId, valueId, isCurrency = true) {
-  const slider = document.getElementById(sliderId);
-  const input = document.getElementById(inputId);
-  const valueDisplay = document.getElementById(valueId);
-
-  function updateFromSlider() {
-    input.value = slider.value;
-    valueDisplay.textContent = isCurrency
-      ? parseFloat(slider.value).toLocaleString()
-      : slider.value;
-  }
-
-  function updateFromInput() {
-    slider.value = input.value;
-    valueDisplay.textContent = isCurrency
-      ? parseFloat(input.value).toLocaleString()
-      : input.value;
-  }
-
-  slider.addEventListener('input', updateFromSlider);
-  input.addEventListener('input', updateFromInput);
-
-  updateFromSlider();
+* {
+    box-sizing: border-box;
 }
 
-// Initialize synced inputs
-syncSliderInput('homePrice', 'homePriceInput', 'homePriceValue');
-syncSliderInput('interestRate', 'interestRateInput', 'interestRateValue', false);
-syncSliderInput('downPayment', 'downPaymentInput', 'downPaymentValue');
-syncSliderInput('propertyTax', 'propertyTaxInput', 'propertyTaxValue');
-syncSliderInput('insurance', 'insuranceInput', 'insuranceValue');
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-// Only Down Payment section is collapsible
-document.querySelectorAll('.collapsible-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    button.classList.toggle('active');
-    const content = button.nextElementSibling;
-    content.style.display = content.style.display === 'block' ? 'none' : 'block';
-  });
-});
+.calculator {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
 
-// Mortgage calculation
-function calculateMortgage() {
-  const price = parseFloat(document.getElementById('homePriceInput').value) || 0;
-  const down = parseFloat(document.getElementById('downPaymentInput').value) || 0;
-  const rate = parseFloat(document.getElementById('interestRateInput').value) || 0;
-  const tax = parseFloat(document.getElementById('propertyTaxInput').value) || 0;
-  const insurance = parseFloat(document.getElementById('insuranceInput').value) || 0;
+h2 {
+    text-align: center;
+    color: #FF5A1F; /* Orange */
+}
 
-  const principal = price - down;
-  const monthlyRate = rate / 100 / 12;
-  const numPayments = 30 * 12;
+label {
+    font-size: 16px;
+    display: block;
+    margin: 10px 0;
+    color: #FF5A1F; /* Orange */
+}
 
-  const monthlyPrincipalInterest = rate > 0
-    ? principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -numPayments))
-    : principal / numPayments;
+input[type="range"], input[type="number"], button {
+    width: 100%;
+    margin: 5px 0;
+}
 
-  const monthlyTax = tax / 12;
-  const monthlyInsurance = insurance / 12;
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+}
 
-  const total = monthlyPrincipalInterest + monthlyTax + monthlyInsurance;
+.slider:focus {
+    background: #002B3A; /* Dark Blue */
+}
 
-  document.getElementById('result').textContent = 
-    `Estimated Monthly Payment: $${total.toFixed(2).toLocaleString()}`;
+input[type="number"], button {
+    padding: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #FF5A1F; /* Orange */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e94b1f; /* Slightly darker orange */
+}
+
+#result {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.collapsible {
+    margin-top: 10px;
+}
+
+.collapsible-btn {
+    background-color: #002B3A; /* Dark Blue */
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.collapsible-btn:hover {
+    background-color: #1a3f52; /* Slightly darker blue */
+}
+
+.content {
+    padding: 10px;
+    display: none;
+    background-color: #f1f1f1;
+}
+
+.content input[type="range"], .content input[type="number"] {
+    width: 90%;
+}
+
+.collapsible-btn:after {
+    content: '\002B'; /* Plus sign */
+    float: right;
+}
+
+.active:after {
+    content: "\2212"; /* Minus sign */
+}
+
+.active .content {
+    display: block;
 }
