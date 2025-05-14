@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mortgage Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="calculator">
-        <h2>Mortgage Calculator</h2>
-        
-        <label for="homePrice">Home Price: $<span id="homePriceValue">0</span></label>
-        <input type="range" id="homePrice" min="0" max="1000000" step="5000" value="0" class="slider">
-        <input type="number" id="homePriceInput" value="0" class="input-box">
+  <div class="calculator">
+    <h2>Mortgage Calculator</h2>
 
-        <label for="downPayment">Down Payment: $<span id="downPaymentValue">0</span></label>
-        <input type="range" id="downPayment" min="0" max="500000" step="5000" value="0" class="slider">
-        <input type="number" id="downPaymentInput" value="0" class="input-box">
+    <!-- Home Price -->
+    <label for="homePrice">Home Price: $<span id="homePriceValue">0</span></label>
+    <input type="range" id="homePrice" min="0" max="1000000" step="1000" value="0" />
+    <input type="number" id="homePriceInput" value="0" />
 
-        <label for="loanTerm">Loan Term (Years): <span id="loanTermValue">0</span> years</label>
-        <input type="range" id="loanTerm" min="5" max="40" step="5" value="0" class="slider">
-        <input type="number" id="loanTermInput" value="0" class="input-box">
+    <!-- Interest Rate -->
+    <label for="interestRate">Interest Rate: <span id="interestRateValue">0</span>%</label>
+    <input type="range" id="interestRate" min="0" max="10" step="0.1" value="0" />
+    <input type="number" id="interestRateInput" value="0" />
 
-        <label for="interestRate">Interest Rate: <span id="interestRateValue">0</span>%</label>
-        <input type="range" id="interestRate" min="1" max="10" step="0.1" value="0" class="slider">
-        <input type="number" id="interestRateInput" value="0" class="input-box">
+    <!-- Down Payment (Collapsible) -->
+    <details>
+      <summary>Down Payment</summary>
+      <label for="downPayment">Amount: $<span id="downPaymentValue">0</span></label>
+      <input type="range" id="downPayment" min="0" max="500000" step="1000" value="0" />
+      <input type="number" id="downPaymentInput" value="0" />
+    </details>
 
-        <div class="collapsible">
-            <button class="collapsible-btn">Property Tax</button>
-            <div class="content">
-                <label for="propertyTax">Annual Property Tax: $<span id="propertyTaxValue">0</span></label>
-                <input type="range" id="propertyTax" min="0" max="15000" step="500" value="0" class="slider">
-                <input type="number" id="propertyTaxInput" value="0" class="input-box">
-            </div>
-        </div>
+    <!-- Property Tax (Collapsible) -->
+    <details>
+      <summary>Property Tax</summary>
+      <label for="propertyTax">Annual: $<span id="propertyTaxValue">0</span></label>
+      <input type="range" id="propertyTax" min="0" max="20000" step="100" value="0" />
+      <input type="number" id="propertyTaxInput" value="0" />
+    </details>
 
-        <div class="collapsible">
-            <button class="collapsible-btn">Home Insurance</button>
-            <div class="content">
-                <label for="homeInsurance">Annual Home Insurance: $<span id="homeInsuranceValue">0</span></label>
-                <input type="range" id="homeInsurance" min="0" max="5000" step="200" value="0" class="slider">
-                <input type="number" id="homeInsuranceInput" value="0" class="input-box">
-            </div>
-        </div>
+    <!-- Insurance (Collapsible) -->
+    <details>
+      <summary>Insurance</summary>
+      <label for="insurance">Annual: $<span id="insuranceValue">0</span></label>
+      <input type="range" id="insurance" min="0" max="10000" step="100" value="0" />
+      <input type="number" id="insuranceInput" value="0" />
+    </details>
 
-        <button id="calculateBtn">Calculate Mortgage</button>
+    <!-- Button -->
+    <button onclick="calculateMortgage()">Calculate Monthly Payment</button>
 
-        <div id="result">
-            <h3>Monthly Payment:</h3>
-            <p id="monthlyPayment">$0.00</p>
-        </div>
-    </div>
+    <!-- Result -->
+    <div id="result"></div>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
