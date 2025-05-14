@@ -9,35 +9,46 @@
 <body>
     <div class="calculator">
         <h2>Mortgage Calculator</h2>
-        <label for="homePrice">Home Price: $<span id="homePriceValue">300000</span></label>
-        <input type="range" id="homePrice" min="50000" max="1000000" step="5000" value="300000" class="slider">
-        <input type="number" id="homePriceInput" value="300000" class="input-box">
+        
+        <label for="homePrice">Home Price: $<span id="homePriceValue">0</span></label>
+        <input type="range" id="homePrice" min="0" max="1000000" step="5000" value="0" class="slider">
+        <input type="number" id="homePriceInput" value="0" class="input-box">
 
-        <label for="downPayment">Down Payment: $<span id="downPaymentValue">60000</span></label>
-        <input type="range" id="downPayment" min="0" max="500000" step="5000" value="60000" class="slider">
-        <input type="number" id="downPaymentInput" value="60000" class="input-box">
+        <label for="downPayment">Down Payment: $<span id="downPaymentValue">0</span></label>
+        <input type="range" id="downPayment" min="0" max="500000" step="5000" value="0" class="slider">
+        <input type="number" id="downPaymentInput" value="0" class="input-box">
 
-        <label for="loanTerm">Loan Term (Years): <span id="loanTermValue">30</span> years</label>
-        <input type="range" id="loanTerm" min="5" max="40" step="5" value="30" class="slider">
-        <input type="number" id="loanTermInput" value="30" class="input-box">
+        <label for="loanTerm">Loan Term (Years): <span id="loanTermValue">0</span> years</label>
+        <input type="range" id="loanTerm" min="5" max="40" step="5" value="0" class="slider">
+        <input type="number" id="loanTermInput" value="0" class="input-box">
 
-        <label for="interestRate">Interest Rate: <span id="interestRateValue">4.0</span>%</label>
-        <input type="range" id="interestRate" min="1" max="10" step="0.1" value="4.0" class="slider">
-        <input type="number" id="interestRateInput" value="4.0" class="input-box">
+        <label for="interestRate">Interest Rate: <span id="interestRateValue">0</span>%</label>
+        <input type="range" id="interestRate" min="1" max="10" step="0.1" value="0" class="slider">
+        <input type="number" id="interestRateInput" value="0" class="input-box">
 
-        <label for="propertyTax">Annual Property Tax: $<span id="propertyTaxValue">3000</span></label>
-        <input type="range" id="propertyTax" min="500" max="15000" step="500" value="3000" class="slider">
-        <input type="number" id="propertyTaxInput" value="3000" class="input-box">
+        <div class="collapsible">
+            <button class="collapsible-btn">Property Tax</button>
+            <div class="content">
+                <label for="propertyTax">Annual Property Tax: $<span id="propertyTaxValue">0</span></label>
+                <input type="range" id="propertyTax" min="0" max="15000" step="500" value="0" class="slider">
+                <input type="number" id="propertyTaxInput" value="0" class="input-box">
+            </div>
+        </div>
 
-        <label for="homeInsurance">Annual Home Insurance: $<span id="homeInsuranceValue">1200</span></label>
-        <input type="range" id="homeInsurance" min="200" max="5000" step="200" value="1200" class="slider">
-        <input type="number" id="homeInsuranceInput" value="1200" class="input-box">
+        <div class="collapsible">
+            <button class="collapsible-btn">Home Insurance</button>
+            <div class="content">
+                <label for="homeInsurance">Annual Home Insurance: $<span id="homeInsuranceValue">0</span></label>
+                <input type="range" id="homeInsurance" min="0" max="5000" step="200" value="0" class="slider">
+                <input type="number" id="homeInsuranceInput" value="0" class="input-box">
+            </div>
+        </div>
 
         <button id="calculateBtn">Calculate Mortgage</button>
 
         <div id="result">
             <h3>Monthly Payment:</h3>
-            <p id="monthlyPayment">$1,400.00</p>
+            <p id="monthlyPayment">$0.00</p>
         </div>
     </div>
 
