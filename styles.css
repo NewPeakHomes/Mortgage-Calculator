@@ -1,121 +1,38 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 .calculator {
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 450px; /* Reduced width */
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
 }
 
 h2 {
-    text-align: center;
-    color: #FF5A1F; /* Orange */
-    font-size: 22px; /* Slightly smaller font */
-    margin-bottom: 15px; /* Reduced margin */
+  text-align: center;
+  color: #FF5A1F;
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
 label {
-    font-size: 14px; /* Smaller font */
-    display: block;
-    margin: 8px 0; /* Reduced margin */
-    color: #FF5A1F; /* Orange */
+  font-size: 14px;
+  display: block;
+  margin: 8px 0;
+  color: #FF5A1F;
 }
 
-input[type="range"], input[type="number"], button {
-    width: 100%;
-    margin: 4px 0; /* Reduced margin */
-}
-
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 8px; /* Reduced height */
-    background: #ddd;
-    border-radius: 5px;
-    outline: none;
-}
-
-.slider:focus {
-    background: #002B3A; /* Dark Blue */
-}
-
-input[type="number"], button {
-    padding: 4px;
-    font-size: 14px; /* Smaller font size */
-}
-
-button {
-    background-color: #FF5A1F; /* Orange */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px; /* Slightly smaller button text */
-    cursor: pointer;
-    padding: 8px; /* Reduced padding */
-}
-
-button:hover {
-    background-color: #e94b1f; /* Slightly darker orange */
-}
-
-#result {
-    margin-top: 15px; /* Reduced margin */
-    text-align: center;
-}
-
-.collapsible {
-    margin-top: 10px;
-}
-
-.collapsible-btn {
-    background-color: #002B3A; /* Dark Blue */
-    color: white;
-    padding: 8px; /* Reduced padding */
-    font-size: 14px; /* Smaller font size */
-    border: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.collapsible-btn:hover {
-    background-color: #1a3f52; /* Slightly darker blue */
-}
-
-.content {
-    padding: 8px; /* Reduced padding */
-    display: none;
-    background-color: #f1f1f1;
-}
-
-.content input[type="range"], .content input[type="number"] {
-    width: 85%; /* Narrower inputs */
-}
-
-.collapsible-btn:after {
-    content: '\002B'; /* Plus sign */
-    float: right;
-}
-
-.active:after {
-    content: "\2212"; /* Minus sign */
-}
-
-.active .content {
-    display: block;
-}
+input[type="]()
