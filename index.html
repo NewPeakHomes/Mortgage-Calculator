@@ -21,36 +21,10 @@
     <input type="number" id="interestRateInput" value="0" />
 
     <!-- Loan Term -->
-    <label for="loanTerm">Loan Term (Years):</label>
-    <select id="loanTerm">
-      <option value="360">30 Years</option>
-      <option value="240">20 Years</option>
-      <option value="180">15 Years</option>
-    </select>
+    <label for="loanTerm">Loan Term: <span id="loanTermValue">0</span> years</label>
+    <input type="range" id="loanTerm" min="10" max="40" step="5" value="0" />
+    <input type="number" id="loanTermInput" value="0" />
 
     <!-- Down Payment (Collapsible) -->
     <details>
-      <summary class="collapsible">Down Payment</summary>
-      <label for="downPayment">Amount: $<span id="downPaymentValue">0</span></label>
-      <input type="range" id="downPayment" min="0" max="500000" step="1000" value="0" />
-      <input type="number" id="downPaymentInput" value="0" />
-    </details>
-
-    <!-- Property Tax (Collapsible) -->
-    <details>
-      <summary class="collapsible">Property Tax</summary>
-      <label for="propertyTax">Annual: $<span id="propertyTaxValue">0</span></label>
-      <input type="range" id="propertyTax" min="0" max="20000" step="100" value="0" />
-      <input type="number" id="propertyTaxInput" value="0" />
-    </details>
-
-    <!-- Insurance (Collapsible) -->
-    <details>
-      <summary class="collapsible">Insurance</summary>
-      <label for="insurance">Annual: $<span id="insuranceValue">0</span></label>
-      <input type="range" id="insurance" min="0" max="10000" step="100" value="0" />
-      <input type="number" id="insuranceInput" value="0" />
-    </details>
-
-    <!-- Button -->
-    <button onclick="calculateMortgage()">Calculate Monthly Payment</button>
+      <summary
