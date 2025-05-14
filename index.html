@@ -30,8 +30,10 @@
       </div>
     </div>
 
-    <!-- Property Tax Collapsible -->
-    <div class="collapsible">
-      <button class="collapsible-btn">Property Tax</button>
-      <div class="content">
-        <label for="propertyTax">Annual Property Tax: $<span id="propertyTaxValue">0</
+    <!-- Property Tax (Visible by default) -->
+    <label for="propertyTax">Annual Property Tax: $<span id="propertyTaxValue">0</span></label>
+    <input type="range" id="propertyTax" min="0" max="20000" step="100" value="0" class="slider" />
+    <input type="number" id="propertyTaxInput" value="0" />
+
+    <!-- Insurance (Visible by default) -->
+    <label for="insurance">Annual Insurance: $<span id
