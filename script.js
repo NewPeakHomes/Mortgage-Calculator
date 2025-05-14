@@ -37,10 +37,10 @@ function calculateMortgage() {
   const rate = parseFloat(document.getElementById("interestRateInput").value) || 0;
   const tax = parseFloat(document.getElementById("propertyTaxInput").value) || 0;
   const insurance = parseFloat(document.getElementById("insuranceInput").value) || 0;
+  const payments = parseInt(document.getElementById("loanTerm").value) || 360;
 
   const loan = price - down;
   const monthlyRate = rate / 100 / 12;
-  const payments = 360;
 
   const monthlyPrincipal = rate > 0
     ? loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -payments))
