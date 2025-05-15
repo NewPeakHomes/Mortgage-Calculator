@@ -15,7 +15,7 @@ body {
   background-color: #fff;
   padding: 25px;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 600px;
   width: 100%;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   color: var(--orange);
@@ -86,4 +86,15 @@ button:hover {
   font-size: 18px;
   font-weight: bold;
   color: var(--darkblue);
+}
+
+/* Row layout for side-by-side inputs */
+.row {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.column {
+  flex: 1;
 }
