@@ -1,6 +1,6 @@
 # Mortgage Calculator
 
-A responsive, customizable mortgage calculator built with HTML, CSS, and JavaScript. This tool estimates monthly payments including interest, property tax, insurance, and optional down payment. Built using Chatcpt by a code clueless marketing team.
+A responsive, customizable mortgage calculator built with HTML, CSS, and JavaScript. This tool estimates monthly payments including interest, property tax, insurance, and optional down payment. Built using Chatgpt by a code clueless marketing team.
 
 ## ✨ Features
 
