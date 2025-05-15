@@ -34,21 +34,4 @@ function calculateMortgage() {
   const price = parseFloat(document.getElementById("homePriceInput").value) || 0;
   const down = parseFloat(document.getElementById("downPaymentInput").value) || 0;
   const rate = parseFloat(document.getElementById("interestRateInput").value) || 0;
-  const termYears = parseInt(document.getElementById("loanTermInput").value) || 0;
-  const tax = parseFloat(document.getElementById("propertyTaxInput").value) || 0;
-  const insurance = parseFloat(document.getElementById("insuranceInput").value) || 0;
-
-  const loan = price - down;
-  const monthlyRate = rate / 100 / 12;
-  const payments = termYears * 12;
-
-  const monthlyPrincipal = rate > 0
-    ? loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -payments))
-    : loan / payments;
-
-  const monthlyTax = tax / 12;
-  const monthlyInsurance = insurance / 12;
-
-  const totalMonthly = monthlyPrincipal + monthlyTax + monthlyInsurance;
-
-  document.getElementById
+  const termYears = parse
